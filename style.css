@@ -1,6 +1,5 @@
-
 /* =========================================
-   ✨ MAGIC GIFT APP
+   ✨ MAGIC GIFT - Optimized CSS
 ========================================= */
 
 * {
@@ -9,13 +8,11 @@
     padding: 0;
 }
 
-
 html,
 body {
     width: 100%;
     min-height: 100%;
 }
-
 
 body {
 
@@ -39,17 +36,17 @@ body {
     background:
         radial-gradient(
             circle at 10% 20%,
-            rgba(255, 182, 233, .65),
+            rgba(255, 182, 233, .55),
             transparent 30%
         ),
         radial-gradient(
             circle at 90% 15%,
-            rgba(169, 199, 255, .7),
+            rgba(169, 199, 255, .55),
             transparent 32%
         ),
         radial-gradient(
             circle at 50% 100%,
-            rgba(218, 174, 255, .75),
+            rgba(218, 174, 255, .6),
             transparent 38%
         ),
         linear-gradient(
@@ -59,16 +56,21 @@ body {
             #fbc2eb
         );
 
-    background-size:
-        180% 180%;
+    background-size: 180% 180%;
 
     animation:
-        backgroundMove 14s ease-in-out infinite;
+        backgroundMove 18s ease-in-out infinite;
+
+    /*
+       تحسين أداء الرسم
+    */
+
+    -webkit-font-smoothing: antialiased;
 }
 
 
 /* =========================================
-   🌌 الخلفية
+   🌌 Aurora
 ========================================= */
 
 body::before {
@@ -77,7 +79,7 @@ body::before {
 
     position: fixed;
 
-    inset: -30%;
+    inset: -25%;
 
     pointer-events: none;
 
@@ -85,18 +87,24 @@ body::before {
         conic-gradient(
             from 0deg,
             transparent,
-            rgba(255,255,255,.18),
+            rgba(255,255,255,.12),
             transparent,
-            rgba(199,125,255,.12),
+            rgba(199,125,255,.08),
             transparent
         );
 
-    filter: blur(60px);
+    /*
+       أخف من 60px
+    */
+
+    filter: blur(30px);
 
     animation:
-        auroraRotate 18s linear infinite;
+        auroraRotate 24s linear infinite;
 
     z-index: 0;
+
+    will-change: transform;
 }
 
 
@@ -117,7 +125,6 @@ body::before {
     z-index: 1;
 }
 
-
 .stars-bg span {
 
     position: absolute;
@@ -130,12 +137,15 @@ body::before {
     opacity: 0;
 
     text-shadow:
-        0 0 8px white,
-        0 0 18px #ffffff,
-        0 0 30px #dca8ff;
+        0 0 7px rgba(255,255,255,.9),
+        0 0 15px rgba(220,168,255,.65);
 
     animation:
-        starFloat 5s ease-in-out infinite;
+        starFloat 6s ease-in-out infinite;
+
+    will-change:
+        transform,
+        opacity;
 }
 
 
@@ -167,45 +177,51 @@ body::before {
     background:
         linear-gradient(
             145deg,
-            rgba(255,255,255,.76),
-            rgba(255,255,255,.48)
+            rgba(255,255,255,.78),
+            rgba(255,255,255,.58)
         );
 
+    /*
+       أخف بكثير من 25px
+    */
+
     backdrop-filter:
-        blur(25px);
+        blur(12px);
 
     -webkit-backdrop-filter:
-        blur(25px);
+        blur(12px);
 
     border:
         1px solid
-        rgba(255,255,255,.85);
+        rgba(255,255,255,.82);
 
     box-shadow:
-        0 35px 90px
-        rgba(70, 40, 110, .28),
+        0 25px 65px
+        rgba(70,40,110,.22),
 
         inset 0 1px 0
-        rgba(255,255,255,.9),
-
-        inset 0 -1px 0
-        rgba(255,255,255,.25);
+        rgba(255,255,255,.9);
 
     animation:
-        cardAppear 1.1s
+        cardAppear .9s
         cubic-bezier(.2,.8,.2,1);
 
     transform-style:
         preserve-3d;
 
     transition:
-        transform .15s ease,
-        box-shadow .3s ease;
+        transform .15s ease;
+
+    /*
+       يساعد المتصفح على تجهيز الكارت
+    */
+
+    will-change: transform;
 }
 
 
 /* =========================================
-   🌈 حدود مضيئة
+   🌈 الحدود
 ========================================= */
 
 .card::before {
@@ -214,11 +230,11 @@ body::before {
 
     position: absolute;
 
-    inset: -2px;
+    inset: -1px;
 
-    border-radius: 36px;
+    border-radius: 35px;
 
-    padding: 2px;
+    padding: 1px;
 
     background:
         linear-gradient(
@@ -231,29 +247,26 @@ body::before {
             #ffffff
         );
 
-    background-size:
-        300% 300%;
+    background-size: 250% 250%;
 
     animation:
-        borderFlow 6s ease infinite;
+        borderFlow 8s ease infinite;
 
     -webkit-mask:
         linear-gradient(#fff 0 0)
         content-box,
         linear-gradient(#fff 0 0);
 
-    -webkit-mask-composite:
-        xor;
+    -webkit-mask-composite: xor;
 
-    mask-composite:
-        exclude;
+    mask-composite: exclude;
 
     pointer-events: none;
 }
 
 
 /* =========================================
-   ✨ لمعة داخل الكارت
+   ✨ Card Shine
 ========================================= */
 
 .card::after {
@@ -262,11 +275,11 @@ body::before {
 
     position: absolute;
 
-    width: 180px;
+    width: 140px;
 
-    height: 500px;
+    height: 450px;
 
-    top: -180px;
+    top: -170px;
 
     left: -220px;
 
@@ -274,17 +287,18 @@ body::before {
         linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.5),
+            rgba(255,255,255,.38),
             transparent
         );
 
-    transform:
-        rotate(25deg);
+    transform: rotate(25deg);
 
     animation:
-        cardShine 5s ease-in-out infinite;
+        cardShine 7s ease-in-out infinite;
 
     pointer-events: none;
+
+    will-change: left;
 }
 
 
@@ -303,17 +317,15 @@ body::before {
 
     filter:
         drop-shadow(
-            0 12px 15px
-            rgba(130,70,170,.22)
+            0 10px 12px
+            rgba(130,70,170,.2)
         );
 
     animation:
-        giftFloat 2.6s
-        ease-in-out infinite;
+        giftFloat 3s ease-in-out infinite;
+
+    will-change: transform;
 }
-
-
-/* هالة حول الهدية */
 
 .gift::after {
 
@@ -322,7 +334,7 @@ body::before {
     position: absolute;
 
     width: 70px;
-    height: 25px;
+    height: 22px;
 
     left: 50%;
     bottom: -3px;
@@ -331,16 +343,14 @@ body::before {
         translateX(-50%);
 
     background:
-        rgba(199,125,255,.3);
+        rgba(199,125,255,.25);
 
-    filter:
-        blur(15px);
+    filter: blur(10px);
 
     border-radius: 50%;
 
     animation:
-        giftGlow 2.6s
-        ease-in-out infinite;
+        giftGlow 3s ease-in-out infinite;
 }
 
 
@@ -356,33 +366,28 @@ h1 {
     font-size:
         clamp(21px, 6vw, 27px);
 
-    font-weight:
-        800;
+    font-weight: 800;
 
-    color:
-        #573b68;
+    color: #573b68;
 
     text-shadow:
-        0 2px 10px
-        rgba(120,70,150,.12);
+        0 2px 8px
+        rgba(120,70,150,.1);
 
     animation:
-        titleAppear .9s .2s both;
+        titleAppear .8s .15s both;
 }
-
 
 .subtitle {
 
     margin-bottom: 4px;
 
-    color:
-        #75627e;
+    color: #75627e;
 
-    font-size:
-        15px;
+    font-size: 15px;
 
     animation:
-        titleAppear .9s .35s both;
+        titleAppear .8s .25s both;
 }
 
 
@@ -391,8 +396,6 @@ h1 {
 ========================================= */
 
 input {
-
-    position: relative;
 
     width: 100%;
 
@@ -408,37 +411,33 @@ input {
 
     outline: none;
 
-    border-radius:
-        19px;
+    border-radius: 19px;
 
     text-align: center;
 
-    font-size:
-        18px;
+    font-size: 18px;
 
-    color:
-        #51395e;
+    color: #51395e;
 
     background:
-        rgba(255,255,255,.82);
+        rgba(255,255,255,.85);
 
     box-shadow:
-        0 8px 25px
-        rgba(100,70,130,.08),
+        0 7px 20px
+        rgba(100,70,130,.07),
 
         inset 0 1px 0
         rgba(255,255,255,.9);
 
     transition:
-        .3s ease;
+        border-color .25s ease,
+        box-shadow .25s ease,
+        transform .25s ease;
 }
-
 
 input::placeholder {
-    color:
-        #aa97b3;
+    color: #aa97b3;
 }
-
 
 input:focus {
 
@@ -446,20 +445,19 @@ input:focus {
         rgba(199,125,255,.8);
 
     transform:
-        translateY(-3px)
-        scale(1.01);
+        translateY(-2px);
 
     box-shadow:
-        0 12px 35px
-        rgba(180,100,230,.22),
+        0 10px 25px
+        rgba(180,100,230,.18),
 
-        0 0 0 5px
-        rgba(199,125,255,.08);
+        0 0 0 4px
+        rgba(199,125,255,.07);
 }
 
 
 /* =========================================
-   🎁 الزر
+   🎁 Button
 ========================================= */
 
 button {
@@ -468,13 +466,11 @@ button {
 
     width: 100%;
 
-    padding:
-        16px;
+    padding: 16px;
 
     border: none;
 
-    border-radius:
-        19px;
+    border-radius: 19px;
 
     cursor: pointer;
 
@@ -482,14 +478,11 @@ button {
 
     color: white;
 
-    font-size:
-        18px;
+    font-size: 18px;
 
-    font-weight:
-        800;
+    font-weight: 800;
 
-    letter-spacing:
-        .3px;
+    letter-spacing: .3px;
 
     background:
         linear-gradient(
@@ -500,24 +493,25 @@ button {
             #ff70a6
         );
 
-    background-size:
-        300% 300%;
+    background-size: 250% 250%;
 
     box-shadow:
-        0 12px 30px
-        rgba(190,100,220,.32),
+        0 10px 25px
+        rgba(190,100,220,.28),
 
         inset 0 1px 0
         rgba(255,255,255,.45);
 
     animation:
-        buttonGradient 5s ease infinite;
+        buttonGradient 7s ease infinite;
 
     transition:
-        transform .25s ease,
-        box-shadow .25s ease;
-}
+        transform .2s ease,
+        box-shadow .2s ease;
 
+    will-change:
+        transform;
+}
 
 button::before {
 
@@ -525,7 +519,8 @@ button::before {
 
     position: absolute;
 
-    width: 35px;
+    width: 28px;
+
     height: 180%;
 
     top: -40%;
@@ -533,65 +528,55 @@ button::before {
     left: -70px;
 
     background:
-        rgba(255,255,255,.5);
+        rgba(255,255,255,.4);
 
-    transform:
-        rotate(25deg);
+    transform: rotate(25deg);
 
-    filter:
-        blur(5px);
+    filter: blur(4px);
 
     animation:
-        buttonShine 3s
-        ease-in-out infinite;
-}
+        buttonShine 4s ease-in-out infinite;
 
+    pointer-events: none;
+}
 
 button:hover {
 
     transform:
-        translateY(-4px)
-        scale(1.015);
+        translateY(-3px)
+        scale(1.01);
 
     box-shadow:
-        0 18px 38px
-        rgba(190,100,220,.42),
-
-        0 0 30px
-        rgba(199,125,255,.18);
+        0 15px 30px
+        rgba(190,100,220,.36);
 }
-
 
 button:active {
 
     transform:
         translateY(1px)
-        scale(.97);
+        scale(.98);
 }
 
 
 /* =========================================
-   ✨ النتيجة
+   ✨ Result
 ========================================= */
 
 #result {
 
-    margin-top:
-        25px;
+    margin-top: 25px;
 
     opacity: 0;
 
     transform:
-        translateY(35px)
-        scale(.82);
+        translateY(25px)
+        scale(.88);
 
-    filter:
-        blur(8px);
+    filter: blur(5px);
 
-    pointer-events:
-        none;
+    pointer-events: none;
 }
-
 
 #result.show {
 
@@ -601,43 +586,34 @@ button:active {
         translateY(0)
         scale(1);
 
-    filter:
-        blur(0);
+    filter: blur(0);
 
     transition:
-        1s
+        .75s
         cubic-bezier(.16,1,.3,1);
 
-    pointer-events:
-        auto;
+    pointer-events: auto;
 }
 
 
 /* =========================================
-   ✨ العنوان السحري
+   ✨ Magic Title
 ========================================= */
 
 .magic-title {
 
-    font-size:
-        20px;
+    font-size: 20px;
 
-    letter-spacing:
-        7px;
+    letter-spacing: 7px;
 
-    color:
-        #b34dff;
+    color: #b34dff;
 
     text-shadow:
-        0 0 8px
-        rgba(179,77,255,.35),
-
-        0 0 20px
-        rgba(255,100,200,.2);
+        0 0 7px
+        rgba(179,77,255,.3);
 
     animation:
-        magicPulse 2s
-        ease-in-out infinite;
+        magicPulse 2.5s ease-in-out infinite;
 }
 
 
@@ -647,73 +623,59 @@ button:active {
 
 .name-glow {
 
-    direction:
-        rtl;
+    direction: rtl;
 
-    unicode-bidi:
-        plaintext;
+    unicode-bidi: plaintext;
 
-    margin:
-        13px 0;
+    margin: 13px 0;
 
     font-size:
         clamp(30px, 10vw, 46px);
 
-    font-weight:
-        900;
+    font-weight: 900;
 
-    color:
-        #d84d91;
+    color: #d84d91;
 
     text-shadow:
         0 0 5px white,
-        0 0 12px rgba(216,77,145,.5),
-        0 0 28px rgba(199,125,255,.45);
+        0 0 10px rgba(216,77,145,.4),
+        0 0 20px rgba(199,125,255,.32);
 
     animation:
-        nameReveal 1.25s
+        nameReveal 1s
         cubic-bezier(.16,1,.3,1);
 }
 
 
 /* =========================================
-   🎨 صندوق الرسم
+   🎨 Art Box
 ========================================= */
 
 .art-box {
 
-    position:
-        relative;
+    position: relative;
 
-    margin:
-        14px 0;
+    margin: 14px 0;
 
-    padding:
-        10px 5px;
+    padding: 10px 5px;
 
-    min-height:
-        105px;
+    min-height: 105px;
 
-    display:
-        flex;
+    display: flex;
 
-    align-items:
-        center;
+    align-items: center;
 
-    justify-content:
-        center;
+    justify-content: center;
 
-    border-radius:
-        22px;
+    border-radius: 22px;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
     background:
         linear-gradient(
             135deg,
-            rgba(255,255,255,.58),
-            rgba(255,255,255,.28)
+            rgba(255,255,255,.62),
+            rgba(255,255,255,.34)
         );
 
     border:
@@ -721,16 +683,15 @@ button:active {
         rgba(255,255,255,.72);
 
     box-shadow:
-        inset 0 0 30px
-        rgba(255,255,255,.5),
+        inset 0 0 20px
+        rgba(255,255,255,.4),
 
-        0 10px 30px
-        rgba(100,60,140,.08);
+        0 8px 25px
+        rgba(100,60,140,.07);
 
     animation:
-        boxReveal 1.1s ease;
+        boxReveal .9s ease;
 }
-
 
 .art-box::before {
 
@@ -743,15 +704,13 @@ button:active {
     background:
         radial-gradient(
             circle at 50% 50%,
-            rgba(199,125,255,.14),
+            rgba(199,125,255,.11),
             transparent 65%
         );
 
     animation:
-        artAura 3s
-        ease-in-out infinite;
+        artAura 4s ease-in-out infinite;
 }
-
 
 .art-box::after {
 
@@ -759,223 +718,175 @@ button:active {
 
     position: absolute;
 
-    width: 45%;
+    width: 35%;
 
-    height: 160%;
+    height: 150%;
 
-    top: -30%;
+    top: -25%;
 
     left: -80%;
 
-    transform:
-        rotate(25deg);
+    transform: rotate(25deg);
 
     background:
         linear-gradient(
             90deg,
             transparent,
-            rgba(255,255,255,.65),
+            rgba(255,255,255,.5),
             transparent
         );
 
     animation:
-        artShine 3.5s
-        ease-in-out infinite;
+        artShine 5s ease-in-out infinite;
 }
 
 
+/* =========================================
+   ASCII
+========================================= */
+
 .ascii {
 
-    position:
-        relative;
+    position: relative;
 
-    z-index:
-        2;
+    z-index: 2;
 
-    display:
-        block;
+    display: block;
 
-    width:
-        100%;
+    width: 100%;
 
-    margin:
-        0;
+    margin: 0;
 
-    padding:
-        0;
+    padding: 0;
 
     font-family:
         "Courier New",
         monospace;
 
-    font-size:
-        7px;
+    font-size: 7px;
 
-    font-weight:
-        bold;
+    font-weight: bold;
 
-    line-height:
-        1;
+    line-height: 1;
 
-    letter-spacing:
-        0;
+    letter-spacing: 0;
 
-    color:
-        #9b4dca;
+    color: #9b4dca;
 
-    text-align:
-        center;
+    text-align: center;
 
-    white-space:
-        pre;
+    white-space: pre;
 
-    overflow:
-        hidden;
+    overflow: hidden;
 
-    direction:
-        ltr;
+    direction: ltr;
 
-    unicode-bidi:
-        isolate;
+    unicode-bidi: isolate;
 
-    -webkit-font-smoothing:
-        none;
+    -webkit-font-smoothing: none;
 
-    font-smooth:
-        never;
-
-    text-rendering:
-        geometricPrecision;
+    text-rendering: geometricPrecision;
 
     text-shadow:
-        0 0 5px
-        rgba(160,68,209,.25);
+        0 0 4px
+        rgba(160,68,209,.2);
 
     animation:
-        asciiAppear 1.5s ease;
+        asciiAppear 1s ease;
 }
 
 
 /* =========================================
-   💌 الرسالة
+   💌 Message
 ========================================= */
 
 .message {
 
-    margin-top:
-        10px;
+    margin-top: 10px;
 
-    padding:
-        0 5px;
+    padding: 0 5px;
 
-    font-size:
-        17px;
+    font-size: 17px;
 
-    line-height:
-        1.7;
+    line-height: 1.7;
 
-    color:
-        #5e4d67;
+    color: #5e4d67;
 
     animation:
-        messageAppear 1.1s .35s both;
+        messageAppear .9s .25s both;
 }
 
 
 /* =========================================
-   ❤️ القلب
+   ❤️ Heart
 ========================================= */
 
 .tiny-heart {
 
-    margin-top:
-        10px;
+    margin-top: 10px;
 
-    font-size:
-        25px;
+    font-size: 25px;
 
-    color:
-        #ff579b;
+    color: #ff579b;
 
     text-shadow:
-        0 0 10px
-        rgba(255,87,155,.35);
+        0 0 8px
+        rgba(255,87,155,.3);
 
     animation:
-        heartBeat 1.25s
-        ease-in-out infinite;
+        heartBeat 1.5s ease-in-out infinite;
 }
 
 
 /* =========================================
-   ✍️ التوقيع
+   ✍️ Creator
 ========================================= */
 
 .creator {
 
-    position:
-        relative;
+    position: relative;
 
-    margin-top:
-        25px;
+    margin-top: 25px;
 
-    padding-top:
-        15px;
+    padding-top: 15px;
 
     border-top:
         1px solid
         rgba(120,80,150,.13);
 
-    display:
-        flex;
+    display: flex;
 
-    flex-direction:
-        column;
+    flex-direction: column;
 
-    gap:
-        4px;
+    gap: 4px;
 
-    color:
-        #80698b;
+    color: #80698b;
 
-    font-size:
-        12px;
+    font-size: 12px;
 
-    opacity:
-        .9;
+    opacity: .9;
 
     animation:
-        creatorAppear 1.2s .7s both;
+        creatorAppear 1s .6s both;
 }
-
 
 .creator strong {
 
-    font-size:
-        14px;
+    font-size: 14px;
 
-    color:
-        #a35bc4;
+    color: #a35bc4;
 
-    font-weight:
-        800;
-
-    text-shadow:
-        0 0 10px
-        rgba(163,91,196,.15);
+    font-weight: 800;
 }
-
 
 .creator small {
 
-    color:
-        #ff6fa3;
+    color: #ff6fa3;
 
-    font-size:
-        13px;
+    font-size: 13px;
 
     animation:
-        heartBeat 1.5s infinite;
+        heartBeat 1.6s infinite;
 }
 
 
@@ -985,32 +896,32 @@ button:active {
 
 .celebration {
 
-    position:
-        fixed;
+    position: fixed;
 
-    z-index:
-        999;
+    z-index: 999;
 
-    pointer-events:
-        none;
+    pointer-events: none;
 
     font-size:
         clamp(16px, 5vw, 26px);
 
-    color:
-        #ff6fa3;
+    color: #ff6fa3;
 
     text-shadow:
-        0 0 10px
+        0 0 8px
         rgba(255,255,255,.8),
 
-        0 0 20px
-        rgba(255,100,180,.5);
+        0 0 15px
+        rgba(255,100,180,.4);
 
     animation:
-        explode 1.8s
+        explode 1.6s
         cubic-bezier(.15,.8,.3,1)
         forwards;
+
+    will-change:
+        transform,
+        opacity;
 }
 
 
@@ -1021,7 +932,7 @@ button:active {
 .shake {
 
     animation:
-        shake .45s ease;
+        shake .4s ease;
 }
 
 
@@ -1032,18 +943,15 @@ button:active {
 @keyframes backgroundMove {
 
     0% {
-        background-position:
-            0% 50%;
+        background-position: 0% 50%;
     }
 
     50% {
-        background-position:
-            100% 50%;
+        background-position: 100% 50%;
     }
 
     100% {
-        background-position:
-            0% 50%;
+        background-position: 0% 50%;
     }
 }
 
@@ -1059,7 +967,7 @@ button:active {
     to {
         transform:
             rotate(360deg)
-            scale(1.15);
+            scale(1.08);
     }
 }
 
@@ -1067,15 +975,17 @@ button:active {
 @keyframes cardAppear {
 
     0% {
+
         opacity: 0;
 
         transform:
-            translateY(70px)
-            scale(.78)
-            rotateX(12deg);
+            translateY(50px)
+            scale(.84)
+            rotateX(8deg);
     }
 
     100% {
+
         opacity: 1;
 
         transform:
@@ -1089,18 +999,15 @@ button:active {
 @keyframes borderFlow {
 
     0% {
-        background-position:
-            0% 50%;
+        background-position: 0% 50%;
     }
 
     50% {
-        background-position:
-            100% 50%;
+        background-position: 100% 50%;
     }
 
     100% {
-        background-position:
-            0% 50%;
+        background-position: 0% 50%;
     }
 }
 
@@ -1108,7 +1015,7 @@ button:active {
 @keyframes cardShine {
 
     0%,
-    55% {
+    65% {
         left: -220px;
     }
 
@@ -1122,6 +1029,7 @@ button:active {
 
     0%,
     100% {
+
         transform:
             translateY(0)
             rotate(-3deg)
@@ -1129,10 +1037,11 @@ button:active {
     }
 
     50% {
+
         transform:
-            translateY(-14px)
+            translateY(-10px)
             rotate(3deg)
-            scale(1.06);
+            scale(1.05);
     }
 }
 
@@ -1141,17 +1050,21 @@ button:active {
 
     0%,
     100% {
-        opacity: .35;
+
+        opacity: .3;
+
         transform:
             translateX(-50%)
             scale(.85);
     }
 
     50% {
-        opacity: .7;
+
+        opacity: .65;
+
         transform:
             translateX(-50%)
-            scale(1.2);
+            scale(1.15);
     }
 }
 
@@ -1159,13 +1072,15 @@ button:active {
 @keyframes titleAppear {
 
     from {
+
         opacity: 0;
 
         transform:
-            translateY(15px);
+            translateY(12px);
     }
 
     to {
+
         opacity: 1;
 
         transform:
@@ -1177,18 +1092,15 @@ button:active {
 @keyframes buttonGradient {
 
     0% {
-        background-position:
-            0% 50%;
+        background-position: 0% 50%;
     }
 
     50% {
-        background-position:
-            100% 50%;
+        background-position: 100% 50%;
     }
 
     100% {
-        background-position:
-            0% 50%;
+        background-position: 0% 50%;
     }
 }
 
@@ -1209,16 +1121,17 @@ button:active {
 @keyframes starFloat {
 
     0% {
+
         opacity: 0;
 
         transform:
-            translateY(25px)
-            scale(.4)
+            translateY(20px)
+            scale(.5)
             rotate(0deg);
     }
 
-    25% {
-        opacity: .7;
+    30% {
+        opacity: .75;
     }
 
     65% {
@@ -1226,12 +1139,13 @@ button:active {
     }
 
     100% {
+
         opacity: 0;
 
         transform:
-            translateY(-100px)
-            scale(1.5)
-            rotate(180deg);
+            translateY(-90px)
+            scale(1.3)
+            rotate(120deg);
     }
 }
 
@@ -1240,6 +1154,7 @@ button:active {
 
     0%,
     100% {
+
         opacity: .55;
 
         transform:
@@ -1247,10 +1162,11 @@ button:active {
     }
 
     50% {
+
         opacity: 1;
 
         transform:
-            scale(1.14);
+            scale(1.08);
     }
 }
 
@@ -1258,24 +1174,26 @@ button:active {
 @keyframes nameReveal {
 
     0% {
+
         opacity: 0;
 
         transform:
-            translateY(30px)
-            scale(.45)
-            rotate(-4deg);
+            translateY(25px)
+            scale(.55)
+            rotate(-3deg);
 
-        filter:
-            blur(12px);
+        filter: blur(8px);
     }
 
     60% {
+
         transform:
-            translateY(-6px)
-            scale(1.08);
+            translateY(-4px)
+            scale(1.05);
     }
 
     100% {
+
         opacity: 1;
 
         transform:
@@ -1283,8 +1201,7 @@ button:active {
             scale(1)
             rotate(0);
 
-        filter:
-            blur(0);
+        filter: blur(0);
     }
 }
 
@@ -1292,21 +1209,21 @@ button:active {
 @keyframes boxReveal {
 
     from {
+
         opacity: 0;
 
         transform:
-            translateY(20px)
-            scale(.8)
-            rotateX(15deg);
+            translateY(15px)
+            scale(.85);
     }
 
     to {
+
         opacity: 1;
 
         transform:
             translateY(0)
-            scale(1)
-            rotateX(0);
+            scale(1);
     }
 }
 
@@ -1315,13 +1232,13 @@ button:active {
 
     0%,
     100% {
-        opacity: .5;
-        transform: scale(.9);
+        opacity: .45;
+        transform: scale(.95);
     }
 
     50% {
-        opacity: 1;
-        transform: scale(1.15);
+        opacity: .85;
+        transform: scale(1.08);
     }
 }
 
@@ -1329,23 +1246,23 @@ button:active {
 @keyframes asciiAppear {
 
     0% {
+
         opacity: 0;
 
         transform:
-            scale(.65);
+            scale(.7);
 
-        filter:
-            blur(7px);
+        filter: blur(5px);
     }
 
     100% {
+
         opacity: 1;
 
         transform:
             scale(1);
 
-        filter:
-            blur(0);
+        filter: blur(0);
     }
 }
 
@@ -1366,13 +1283,15 @@ button:active {
 @keyframes messageAppear {
 
     from {
+
         opacity: 0;
 
         transform:
-            translateY(18px);
+            translateY(15px);
     }
 
     to {
+
         opacity: 1;
 
         transform:
@@ -1385,13 +1304,11 @@ button:active {
 
     0%,
     100% {
-        transform:
-            scale(1);
+        transform: scale(1);
     }
 
     50% {
-        transform:
-            scale(1.3);
+        transform: scale(1.2);
     }
 }
 
@@ -1399,13 +1316,15 @@ button:active {
 @keyframes creatorAppear {
 
     from {
+
         opacity: 0;
 
         transform:
-            translateY(10px);
+            translateY(8px);
     }
 
     to {
+
         opacity: .9;
 
         transform:
@@ -1417,6 +1336,7 @@ button:active {
 @keyframes explode {
 
     0% {
+
         opacity: 1;
 
         transform:
@@ -1430,6 +1350,7 @@ button:active {
     }
 
     100% {
+
         opacity: 0;
 
         transform:
@@ -1437,8 +1358,8 @@ button:active {
                 var(--x),
                 var(--y)
             )
-            scale(1.5)
-            rotate(540deg);
+            scale(1.35)
+            rotate(360deg);
     }
 }
 
@@ -1447,28 +1368,23 @@ button:active {
 
     0%,
     100% {
-        transform:
-            translateX(0);
+        transform: translateX(0);
     }
 
     20% {
-        transform:
-            translateX(-9px);
+        transform: translateX(-8px);
     }
 
     40% {
-        transform:
-            translateX(9px);
+        transform: translateX(8px);
     }
 
     60% {
-        transform:
-            translateX(-7px);
+        transform: translateX(-6px);
     }
 
     80% {
-        transform:
-            translateX(7px);
+        transform: translateX(6px);
     }
 }
 
@@ -1480,15 +1396,31 @@ button:active {
 @media (max-width: 520px) {
 
     body {
-        padding:
-            12px;
+
+        padding: 12px;
+
+        /*
+           إلغاء حركة الخلفية على الموبايل
+           يوفر طاقة و FPS.
+        */
+
+        animation: none;
+
+        background-size: 140% 140%;
     }
 
+    body::before {
+
+        animation: none;
+
+        opacity: .65;
+
+        filter: blur(20px);
+    }
 
     .card {
 
-        width:
-            96vw;
+        width: 96vw;
 
         max-height:
             calc(100vh - 24px);
@@ -1496,74 +1428,76 @@ button:active {
         padding:
             27px 17px 18px;
 
-        border-radius:
-            29px;
+        border-radius: 29px;
+
+        /*
+           Blur أخف على الهاتف
+        */
+
+        backdrop-filter: blur(8px);
+
+        -webkit-backdrop-filter: blur(8px);
+
+        box-shadow:
+            0 20px 45px
+            rgba(70,40,110,.2);
     }
 
+    /*
+       لا نحتاج حركة حدود قوية على الهاتف
+    */
+
+    .card::before {
+        animation-duration: 12s;
+    }
 
     .gift {
-        font-size:
-            55px;
+        font-size: 55px;
     }
-
 
     h1 {
-        font-size:
-            22px;
+        font-size: 22px;
     }
-
 
     .subtitle {
-        font-size:
-            14px;
+        font-size: 14px;
     }
-
 
     input {
-        font-size:
-            17px;
 
-        padding:
-            15px;
+        font-size: 17px;
+
+        padding: 15px;
     }
-
 
     button {
-        font-size:
-            17px;
 
-        padding:
-            15px;
+        font-size: 17px;
+
+        padding: 15px;
     }
 
-
     .art-box {
-        min-height:
-            95px;
+
+        min-height: 95px;
 
         padding:
             8px 2px;
     }
 
-
     .ascii {
-        font-size:
-            5.5px;
 
-        line-height:
-            .95;
+        font-size: 5.5px;
+
+        line-height: .95;
     }
-
 
     .message {
-        font-size:
-            15px;
+        font-size: 15px;
     }
 
-
     .name-glow {
-        font-size:
-            34px;
+        font-size: 34px;
     }
 }
 
@@ -1575,32 +1509,25 @@ button:active {
 @media (max-height: 700px) {
 
     .card {
-        padding-top:
-            20px;
+        padding-top: 20px;
     }
-
 
     .gift {
-        font-size:
-            45px;
+        font-size: 45px;
     }
-
 
     h1 {
-        margin-top:
-            5px;
+        margin-top: 5px;
     }
 
-
     .creator {
-        margin-top:
-            15px;
+        margin-top: 15px;
     }
 }
 
 
 /* =========================================
-   ♿ تقليل الحركة
+   ⚡ أجهزة ضعيفة / تقليل الحركة
 ========================================= */
 
 @media (prefers-reduced-motion: reduce) {
@@ -1618,4 +1545,37 @@ button:active {
         transition-duration:
             .01ms !important;
     }
+}
+
+
+/* =========================================
+   🚀 تحسين اللمس
+========================================= */
+
+button,
+input {
+
+    -webkit-tap-highlight-color:
+        transparent;
+}
+
+
+/* =========================================
+   📜 Scrollbar
+========================================= */
+
+.card::-webkit-scrollbar {
+    width: 5px;
+}
+
+.card::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.card::-webkit-scrollbar-thumb {
+
+    background:
+        rgba(160,100,190,.22);
+
+    border-radius: 10px;
 }

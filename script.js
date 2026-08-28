@@ -1,7 +1,9 @@
+/* =================================
+   🎨 MAGIC GIFT - Optimized JS
+================================= */
 
 const canvas = document.createElement("canvas");
-const ctx = canvas.getContext("2d");
-
+const ctx = canvas.getContext("2d", { willReadFrequently: true });
 
 /* =================================
    🎨 رسم الاسم بالرموز
@@ -9,64 +11,39 @@ const ctx = canvas.getContext("2d");
 
 function makeArt(text) {
 
-    const isArabic =
-        /[\u0600-\u06FF]/.test(text);
-
+    const isArabic = /[\u0600-\u06FF]/.test(text);
 
     canvas.width = 900;
     canvas.height = 280;
 
-
-    ctx.clearRect(
-        0,
-        0,
-        canvas.width,
-        canvas.height
-    );
-
-
-    /* =========================
-       إعداد النص
-    ========================= */
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
 
     ctx.fillStyle = "#ffffff";
-
     ctx.textAlign = "center";
-
     ctx.textBaseline = "middle";
 
-    ctx.direction =
-        isArabic ? "rtl" : "ltr";
+    /*
+       مهم:
+       direction = rtl للعربي
+       لكن الـ ASCII نفسه يظل ltr
+       حتى لا يتشقلب الشكل.
+    */
+    ctx.direction = isArabic ? "rtl" : "ltr";
 
-
-    let fontSize =
-        isArabic ? 180 : 175;
-
-
-    /* تصغير الاسم لو طويل */
+    let fontSize = isArabic ? 180 : 175;
 
     while (fontSize > 60) {
 
-        ctx.font =
-            `900 ${fontSize}px Arial`;
+        ctx.font = `900 ${fontSize}px Arial`;
 
-        if (
-            ctx.measureText(text).width <= 800
-        ) {
+        if (ctx.measureText(text).width <= 800) {
             break;
         }
 
         fontSize -= 5;
     }
 
-
-    ctx.font =
-        `900 ${fontSize}px Arial`;
-
-
-    /* =========================
-       رسم الاسم
-    ========================= */
+    ctx.font = `900 ${fontSize}px Arial`;
 
     ctx.fillText(
         text,
@@ -74,75 +51,39 @@ function makeArt(text) {
         canvas.height / 2
     );
 
+    const data = ctx.getImageData(
+        0,
+        0,
+        canvas.width,
+        canvas.height
+    );
 
-    /* =========================
-       أخذ الـ Pixels
-    ========================= */
-
-    const data =
-        ctx.getImageData(
-            0,
-            0,
-            canvas.width,
-            canvas.height
-        );
-
-
-    /* =========================
-       تحويله إلى Symbols
-    ========================= */
-
-    const symbols = [
-        "•",
-        "▪",
-        "●",
-        "✦"
-    ];
-
-
-    let lines = [];
-
+    const symbols = ["•", "▪", "●", "✦"];
 
     const stepX = 11;
     const stepY = 12;
 
+    const lines = [];
 
-    for (
-        let y = 0;
-        y < canvas.height;
-        y += stepY
-    ) {
+    for (let y = 0; y < canvas.height; y += stepY) {
 
         let line = "";
 
-
-        for (
-            let x = 0;
-            x < canvas.width;
-            x += stepX
-        ) {
+        for (let x = 0; x < canvas.width; x += stepX) {
 
             const index =
-                (
-                    y *
-                    canvas.width +
-                    x
-                ) * 4;
-
+                (y * canvas.width + x) * 4;
 
             const alpha =
                 data.data[index + 3];
 
-
             if (alpha > 140) {
 
-                line +=
-                    symbols[
-                        Math.floor(
-                            Math.random() *
-                            symbols.length
-                        )
-                    ];
+                line += symbols[
+                    Math.floor(
+                        Math.random() * symbols.length
+                    )
+                ];
 
             } else {
 
@@ -150,10 +91,8 @@ function makeArt(text) {
             }
         }
 
-
         lines.push(line);
     }
-
 
     return lines.join("\n");
 }
@@ -168,45 +107,48 @@ function createStars() {
     const container =
         document.querySelector(".stars-bg");
 
-
-    if (!container) {
-        return;
-    }
-
+    if (!container) return;
 
     container.innerHTML = "";
 
+    /*
+       كان 45 نجمة.
+       25 كفاية جدًا وتعطي نفس الإحساس
+       مع ضغط أقل على المتصفح.
+    */
 
-    for (let i = 0; i < 45; i++) {
+    const starCount =
+        window.innerWidth < 600 ? 16 : 25;
+
+    const fragment =
+        document.createDocumentFragment();
+
+    for (let i = 0; i < starCount; i++) {
 
         const star =
             document.createElement("span");
-
 
         star.textContent =
             Math.random() > 0.65
                 ? "✦"
                 : "•";
 
-
         star.style.left =
-            Math.random() * 100 + "%";
-
+            `${Math.random() * 100}%`;
 
         star.style.top =
-            Math.random() * 100 + "%";
-
+            `${Math.random() * 100}%`;
 
         star.style.animationDelay =
-            Math.random() * 6 + "s";
-
+            `${Math.random() * 6}s`;
 
         star.style.animationDuration =
-            3 + Math.random() * 5 + "s";
+            `${4 + Math.random() * 4}s`;
 
-
-        container.appendChild(star);
+        fragment.appendChild(star);
     }
+
+    container.appendChild(fragment);
 }
 
 
@@ -224,63 +166,63 @@ function celebration() {
         "♡"
     ];
 
+    /*
+       عدد أقل على الموبايل
+    */
 
-    for (let i = 0; i < 28; i++) {
+    const count =
+        window.innerWidth < 600 ? 16 : 22;
+
+    const fragment =
+        document.createDocumentFragment();
+
+    const particles = [];
+
+    for (let i = 0; i < count; i++) {
 
         const particle =
             document.createElement("div");
 
-
         particle.className =
             "celebration";
-
 
         particle.textContent =
             symbols[
                 Math.floor(
-                    Math.random() *
-                    symbols.length
+                    Math.random() * symbols.length
                 )
             ];
 
-
         particle.style.left =
-            50 +
-            (Math.random() * 30 - 15)
-            + "%";
-
+            `${50 + (Math.random() * 30 - 15)}%`;
 
         particle.style.top =
-            45 +
-            (Math.random() * 20 - 10)
-            + "%";
-
+            `${45 + (Math.random() * 20 - 10)}%`;
 
         particle.style.setProperty(
             "--x",
-            (Math.random() * 500 - 250)
-            + "px"
+            `${Math.random() * 400 - 200}px`
         );
-
 
         particle.style.setProperty(
             "--y",
-            (Math.random() * -500 - 100)
-            + "px"
+            `${Math.random() * -400 - 100}px`
         );
 
+        fragment.appendChild(particle);
 
-        document.body.appendChild(
-            particle
-        );
-
-
-        setTimeout(() => {
-
-            particle.remove();
-
-        }, 1800);
+        particles.push(particle);
     }
+
+    document.body.appendChild(fragment);
+
+    setTimeout(() => {
+
+        particles.forEach(
+            particle => particle.remove()
+        );
+
+    }, 1600);
 }
 
 
@@ -308,42 +250,37 @@ function showGift() {
     const input =
         document.getElementById("name");
 
-
     const result =
         document.getElementById("result");
 
+    if (!input || !result) return;
 
     const name =
         input.value.trim();
-
 
     if (!name) {
 
         input.classList.add("shake");
 
-
         setTimeout(() => {
-
-            input.classList.remove(
-                "shake"
-            );
-
-        }, 500);
-
+            input.classList.remove("shake");
+        }, 450);
 
         input.focus();
 
         return;
     }
 
-
     const safeName =
         escapeHTML(name);
 
+    /*
+       الرسم يحصل مرة واحدة فقط
+       عند الضغط على الزر.
+    */
 
     const art =
         makeArt(name);
-
 
     const messages = [
 
@@ -359,7 +296,6 @@ function showGift() {
 
     ];
 
-
     const message =
         messages[
             Math.floor(
@@ -368,18 +304,15 @@ function showGift() {
             )
         ];
 
-
     result.innerHTML = `
 
         <div class="magic-title">
             ✦ ✧ ★ ✧ ✦
         </div>
 
-
         <div class="name-glow">
             ${safeName} ❤️
         </div>
-
 
         <div class="art-box">
 
@@ -387,16 +320,13 @@ function showGift() {
 
         </div>
 
-
         <div class="magic-title">
             ✦ ✧ ★ ✧ ✦
         </div>
 
-
         <div class="message">
             ${message}
         </div>
-
 
         <div class="tiny-heart">
             ♥
@@ -404,105 +334,146 @@ function showGift() {
 
     `;
 
+    result.classList.remove("show");
 
-    result.classList.remove(
-        "show"
-    );
+    /*
+       requestAnimationFrame أفضل من
+       setTimeout هنا للـ rendering.
+    */
 
+    requestAnimationFrame(() => {
 
-    setTimeout(() => {
+        requestAnimationFrame(() => {
 
-        result.classList.add(
-            "show"
-        );
+            result.classList.add("show");
 
+            celebration();
 
-        celebration();
+        });
 
-    }, 100);
+    });
 }
 
 
 /* =================================
-   تشغيل النجوم
+   🪄 3D CARD
 ================================= */
 
-createStars();
+function setupCard3D() {
 
+    const card =
+        document.querySelector(".card");
 
-/* =================================
-   Enter لإظهار الهدية
-================================= */
+    /*
+       لا نشغل 3D على الشاشات الصغيرة.
+       الموبايل يستفيد أكثر من الأداء.
+    */
 
-const nameInput =
-    document.getElementById("name");
+    if (
+        !card ||
+        !window.matchMedia("(pointer: fine)").matches
+    ) {
+        return;
+    }
 
+    let rafId = null;
 
-if (nameInput) {
+    let mouseX = 0;
+    let mouseY = 0;
 
-    nameInput.addEventListener(
-        "keydown",
-        function(event) {
+    let currentX = 0;
+    let currentY = 0;
 
-            if (event.key === "Enter") {
+    function animateCard() {
 
-                showGift();
-            }
+        currentX +=
+            (mouseX - currentX) * 0.08;
 
-        }
-    );
+        currentY +=
+            (mouseY - currentY) * 0.08;
 
-/* =================================
-   🪄 3D Card Effect
-================================= */
+        card.style.transform =
+            `perspective(1000px)
+             rotateX(${currentY}deg)
+             rotateY(${currentX}deg)`;
 
-const card =
-    document.querySelector(".card");
-
-
-if (card && window.matchMedia(
-    "(pointer: fine)"
-).matches) {
+        rafId =
+            requestAnimationFrame(
+                animateCard
+            );
+    }
 
     document.addEventListener(
         "mousemove",
         (event) => {
 
-            const x =
-                (event.clientX /
-                window.innerWidth) - 0.5;
+            mouseX =
+                ((event.clientX /
+                window.innerWidth) - 0.5) * 4;
 
+            mouseY =
+                ((event.clientY /
+                window.innerHeight) - 0.5) * -4;
 
-            const y =
-                (event.clientY /
-                window.innerHeight) - 0.5;
-
-
-            const rotateX =
-                y * -4;
-
-
-            const rotateY =
-                x * 4;
-
-
-            card.style.transform =
-                `perspective(1000px)
-                 rotateX(${rotateX}deg)
-                 rotateY(${rotateY}deg)`;
-        }
+            if (!rafId) {
+                rafId =
+                    requestAnimationFrame(
+                        animateCard
+                    );
+            }
+        },
+        { passive: true }
     );
-
 
     document.addEventListener(
         "mouseleave",
         () => {
 
-            card.style.transform =
-                "";
+            mouseX = 0;
+            mouseY = 0;
+
+            if (!rafId) {
+                rafId =
+                    requestAnimationFrame(
+                        animateCard
+                    );
+            }
         }
     );
 }
 
 
-}
+/* =================================
+   🚀 التشغيل
+================================= */
+
+document.addEventListener(
+    "DOMContentLoaded",
+    () => {
+
+        createStars();
+
+        setupCard3D();
+
+        const nameInput =
+            document.getElementById("name");
+
+        if (nameInput) {
+
+            nameInput.addEventListener(
+                "keydown",
+                (event) => {
+
+                    if (event.key === "Enter") {
+
+                        event.preventDefault();
+
+                        showGift();
+                    }
+
+                }
+            );
+        }
+
+    }
+);
