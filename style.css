@@ -1,5 +1,5 @@
 /* =========================================
-   ✨ MAGIC GIFT - Optimized CSS
+   ✨ MAGIC GIFT - LIGHTWEIGHT CSS
 ========================================= */
 
 * {
@@ -15,14 +15,13 @@ body {
 }
 
 body {
-
     min-height: 100vh;
 
     display: flex;
     justify-content: center;
     align-items: center;
 
-    padding: 20px;
+    padding: 18px;
 
     font-family:
         Arial,
@@ -33,78 +32,54 @@ body {
 
     color: #573b68;
 
+    /* خلفية ثابتة أخف من الـ animated gradients */
     background:
         radial-gradient(
-            circle at 10% 20%,
+            circle at 15% 20%,
             rgba(255, 182, 233, .55),
             transparent 30%
         ),
         radial-gradient(
-            circle at 90% 15%,
+            circle at 85% 15%,
             rgba(169, 199, 255, .55),
-            transparent 32%
-        ),
-        radial-gradient(
-            circle at 50% 100%,
-            rgba(218, 174, 255, .6),
-            transparent 38%
+            transparent 30%
         ),
         linear-gradient(
             135deg,
             #8ec5fc,
-            #e0c3fc,
+            #e0c3fc 50%,
             #fbc2eb
         );
-
-    background-size: 180% 180%;
-
-    animation:
-        backgroundMove 18s ease-in-out infinite;
-
-    /*
-       تحسين أداء الرسم
-    */
-
-    -webkit-font-smoothing: antialiased;
 }
 
 
 /* =========================================
-   🌌 Aurora
+   🌌 Aurora خفيفة
 ========================================= */
 
 body::before {
-
     content: "";
 
     position: fixed;
-
-    inset: -25%;
+    inset: -20%;
 
     pointer-events: none;
 
     background:
-        conic-gradient(
-            from 0deg,
-            transparent,
-            rgba(255,255,255,.12),
-            transparent,
-            rgba(199,125,255,.08),
-            transparent
+        radial-gradient(
+            circle,
+            rgba(255,255,255,.16),
+            transparent 55%
         );
 
-    /*
-       أخف من 60px
-    */
+    filter: blur(35px);
 
-    filter: blur(30px);
+    opacity: .7;
 
     animation:
-        auroraRotate 24s linear infinite;
+        aurora 12s ease-in-out infinite alternate;
 
     z-index: 0;
-
-    will-change: transform;
 }
 
 
@@ -113,9 +88,7 @@ body::before {
 ========================================= */
 
 .stars-bg {
-
     position: fixed;
-
     inset: 0;
 
     overflow: hidden;
@@ -126,35 +99,29 @@ body::before {
 }
 
 .stars-bg span {
-
     position: absolute;
 
     color: white;
 
     font-size:
-        clamp(8px, 1.5vw, 16px);
+        clamp(8px, 1.3vw, 15px);
 
     opacity: 0;
 
     text-shadow:
-        0 0 7px rgba(255,255,255,.9),
-        0 0 15px rgba(220,168,255,.65);
+        0 0 7px white,
+        0 0 15px rgba(220,168,255,.7);
 
     animation:
-        starFloat 6s ease-in-out infinite;
-
-    will-change:
-        transform,
-        opacity;
+        starFloat 5s ease-in-out infinite;
 }
 
 
 /* =========================================
-   💎 الكارت
+   💎 CARD
 ========================================= */
 
 .card {
-
     position: relative;
 
     z-index: 5;
@@ -163,231 +130,154 @@ body::before {
         min(94vw, 460px);
 
     max-height:
-        calc(100vh - 40px);
+        calc(100vh - 36px);
 
     overflow-y: auto;
 
     padding:
-        34px 26px 22px;
+        32px 25px 22px;
 
     text-align: center;
 
-    border-radius: 34px;
+    border-radius: 30px;
 
+    /* بدون backdrop-filter لأنه مكلف على بعض الأجهزة */
     background:
-        linear-gradient(
-            145deg,
-            rgba(255,255,255,.78),
-            rgba(255,255,255,.58)
-        );
-
-    /*
-       أخف بكثير من 25px
-    */
-
-    backdrop-filter:
-        blur(12px);
-
-    -webkit-backdrop-filter:
-        blur(12px);
+        rgba(255,255,255,.78);
 
     border:
         1px solid
-        rgba(255,255,255,.82);
+        rgba(255,255,255,.85);
 
     box-shadow:
-        0 25px 65px
+        0 25px 60px
         rgba(70,40,110,.22),
 
         inset 0 1px 0
         rgba(255,255,255,.9);
 
     animation:
-        cardAppear .9s
+        cardAppear .8s
         cubic-bezier(.2,.8,.2,1);
 
-    transform-style:
-        preserve-3d;
+    transform-style: preserve-3d;
 
     transition:
-        transform .15s ease;
-
-    /*
-       يساعد المتصفح على تجهيز الكارت
-    */
+        transform .15s ease,
+        box-shadow .25s ease;
 
     will-change: transform;
 }
 
 
 /* =========================================
-   🌈 الحدود
+   🌈 Border
 ========================================= */
 
 .card::before {
-
     content: "";
 
     position: absolute;
 
     inset: -1px;
 
-    border-radius: 35px;
-
-    padding: 1px;
-
-    background:
-        linear-gradient(
-            120deg,
-            #ffffff,
-            #e9b6ff,
-            #ffb8d9,
-            #ffffff,
-            #b8d9ff,
-            #ffffff
-        );
-
-    background-size: 250% 250%;
-
-    animation:
-        borderFlow 8s ease infinite;
-
-    -webkit-mask:
-        linear-gradient(#fff 0 0)
-        content-box,
-        linear-gradient(#fff 0 0);
-
-    -webkit-mask-composite: xor;
-
-    mask-composite: exclude;
+    border-radius: 31px;
 
     pointer-events: none;
+
+    border: 1px solid
+        rgba(199,125,255,.28);
 }
 
 
 /* =========================================
-   ✨ Card Shine
+   ✨ Shine خفيفة
 ========================================= */
 
 .card::after {
-
     content: "";
 
     position: absolute;
 
-    width: 140px;
+    width: 120px;
+    height: 250px;
 
-    height: 450px;
-
-    top: -170px;
-
-    left: -220px;
+    top: -100px;
+    left: -180px;
 
     background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.38),
-            transparent
-        );
+        rgba(255,255,255,.35);
 
     transform: rotate(25deg);
 
+    filter: blur(8px);
+
     animation:
-        cardShine 7s ease-in-out infinite;
+        cardShine 6s ease-in-out infinite;
 
     pointer-events: none;
-
-    will-change: left;
 }
 
 
 /* =========================================
-   🎁 الهدية
+   🎁 Gift
 ========================================= */
 
 .gift {
-
     position: relative;
 
     display: inline-block;
 
     font-size:
-        clamp(54px, 14vw, 72px);
+        clamp(52px, 13vw, 70px);
 
     filter:
         drop-shadow(
-            0 10px 12px
+            0 8px 10px
             rgba(130,70,170,.2)
         );
 
     animation:
-        giftFloat 3s ease-in-out infinite;
+        giftFloat 2.8s ease-in-out infinite;
 
     will-change: transform;
 }
 
-.gift::after {
-
-    content: "";
-
-    position: absolute;
-
-    width: 70px;
-    height: 22px;
-
-    left: 50%;
-    bottom: -3px;
-
-    transform:
-        translateX(-50%);
-
-    background:
-        rgba(199,125,255,.25);
-
-    filter: blur(10px);
-
-    border-radius: 50%;
-
-    animation:
-        giftGlow 3s ease-in-out infinite;
-}
-
 
 /* =========================================
-   📝 العنوان
+   📝 Title
 ========================================= */
 
 h1 {
-
     margin:
-        13px 0 8px;
+        12px 0 7px;
 
     font-size:
         clamp(21px, 6vw, 27px);
 
     font-weight: 800;
 
-    color: #573b68;
+    color:
+        #573b68;
 
     text-shadow:
         0 2px 8px
         rgba(120,70,150,.1);
 
     animation:
-        titleAppear .8s .15s both;
+        titleAppear .7s .1s both;
 }
 
 .subtitle {
-
     margin-bottom: 4px;
 
-    color: #75627e;
+    color:
+        #75627e;
 
     font-size: 15px;
 
     animation:
-        titleAppear .8s .25s both;
+        titleAppear .7s .2s both;
 }
 
 
@@ -396,63 +286,57 @@ h1 {
 ========================================= */
 
 input {
-
     width: 100%;
 
     padding:
-        17px 18px;
+        16px 17px;
 
     margin:
-        16px 0 12px;
+        15px 0 11px;
 
     border:
         2px solid
-        rgba(255,255,255,.8);
+        rgba(255,255,255,.85);
 
     outline: none;
 
-    border-radius: 19px;
+    border-radius: 18px;
 
     text-align: center;
 
     font-size: 18px;
 
-    color: #51395e;
+    color:
+        #51395e;
 
     background:
-        rgba(255,255,255,.85);
+        rgba(255,255,255,.9);
 
     box-shadow:
         0 7px 20px
-        rgba(100,70,130,.07),
-
-        inset 0 1px 0
-        rgba(255,255,255,.9);
+        rgba(100,70,130,.07);
 
     transition:
-        border-color .25s ease,
-        box-shadow .25s ease,
-        transform .25s ease;
+        border-color .2s ease,
+        transform .2s ease,
+        box-shadow .2s ease;
 }
 
 input::placeholder {
-    color: #aa97b3;
+    color:
+        #aa97b3;
 }
 
 input:focus {
-
     border-color:
-        rgba(199,125,255,.8);
+        rgba(199,125,255,.75);
 
     transform:
         translateY(-2px);
 
     box-shadow:
         0 10px 25px
-        rgba(180,100,230,.18),
-
-        0 0 0 4px
-        rgba(199,125,255,.07);
+        rgba(180,100,230,.16);
 }
 
 
@@ -461,16 +345,15 @@ input:focus {
 ========================================= */
 
 button {
-
     position: relative;
 
     width: 100%;
 
-    padding: 16px;
+    padding: 15px;
 
     border: none;
 
-    border-radius: 19px;
+    border-radius: 18px;
 
     cursor: pointer;
 
@@ -482,114 +365,93 @@ button {
 
     font-weight: 800;
 
-    letter-spacing: .3px;
-
     background:
         linear-gradient(
             120deg,
             #ff70a6,
             #c77dff,
-            #8e9eff,
-            #ff70a6
+            #8e9eff
         );
-
-    background-size: 250% 250%;
 
     box-shadow:
         0 10px 25px
         rgba(190,100,220,.28),
 
         inset 0 1px 0
-        rgba(255,255,255,.45);
-
-    animation:
-        buttonGradient 7s ease infinite;
+        rgba(255,255,255,.4);
 
     transition:
         transform .2s ease,
         box-shadow .2s ease;
-
-    will-change:
-        transform;
 }
 
 button::before {
-
     content: "";
 
     position: absolute;
 
-    width: 28px;
+    width: 30px;
+    height: 160%;
 
-    height: 180%;
-
-    top: -40%;
+    top: -30%;
 
     left: -70px;
 
     background:
-        rgba(255,255,255,.4);
+        rgba(255,255,255,.45);
 
     transform: rotate(25deg);
 
-    filter: blur(4px);
-
     animation:
         buttonShine 4s ease-in-out infinite;
-
-    pointer-events: none;
 }
 
 button:hover {
-
     transform:
-        translateY(-3px)
-        scale(1.01);
+        translateY(-3px);
 
     box-shadow:
         0 15px 30px
-        rgba(190,100,220,.36);
+        rgba(190,100,220,.35);
 }
 
 button:active {
-
     transform:
-        translateY(1px)
-        scale(.98);
+        scale(.97);
 }
 
 
 /* =========================================
-   ✨ Result
+   ✨ RESULT
 ========================================= */
 
 #result {
-
-    margin-top: 25px;
+    margin-top: 23px;
 
     opacity: 0;
 
     transform:
         translateY(25px)
-        scale(.88);
+        scale(.9);
 
-    filter: blur(5px);
+    filter:
+        blur(5px);
 
     pointer-events: none;
 }
 
 #result.show {
-
     opacity: 1;
 
     transform:
         translateY(0)
         scale(1);
 
-    filter: blur(0);
+    filter:
+        blur(0);
 
     transition:
-        .75s
+        .7s
         cubic-bezier(.16,1,.3,1);
 
     pointer-events: auto;
@@ -597,19 +459,19 @@ button:active {
 
 
 /* =========================================
-   ✨ Magic Title
+   ✨ Magic title
 ========================================= */
 
 .magic-title {
+    font-size: 19px;
 
-    font-size: 20px;
+    letter-spacing: 6px;
 
-    letter-spacing: 7px;
-
-    color: #b34dff;
+    color:
+        #b34dff;
 
     text-shadow:
-        0 0 7px
+        0 0 8px
         rgba(179,77,255,.3);
 
     animation:
@@ -618,48 +480,51 @@ button:active {
 
 
 /* =========================================
-   ❤️ الاسم
+   ❤️ Name
 ========================================= */
 
 .name-glow {
-
     direction: rtl;
 
     unicode-bidi: plaintext;
 
-    margin: 13px 0;
+    margin:
+        12px 0;
 
     font-size:
-        clamp(30px, 10vw, 46px);
+        clamp(29px, 9vw, 44px);
 
     font-weight: 900;
 
-    color: #d84d91;
+    color:
+        #d84d91;
 
     text-shadow:
         0 0 5px white,
-        0 0 10px rgba(216,77,145,.4),
-        0 0 20px rgba(199,125,255,.32);
+        0 0 12px rgba(216,77,145,.4),
+        0 0 22px rgba(199,125,255,.35);
 
     animation:
-        nameReveal 1s
+        nameReveal .9s
         cubic-bezier(.16,1,.3,1);
 }
 
 
 /* =========================================
-   🎨 Art Box
+   🎨 ASCII BOX
 ========================================= */
 
 .art-box {
-
     position: relative;
 
-    margin: 14px 0;
+    margin:
+        13px 0;
 
-    padding: 10px 5px;
+    padding:
+        9px 4px;
 
-    min-height: 105px;
+    min-height:
+        105px;
 
     display: flex;
 
@@ -667,34 +532,29 @@ button:active {
 
     justify-content: center;
 
-    border-radius: 22px;
+    border-radius: 20px;
 
     overflow: hidden;
 
     background:
-        linear-gradient(
-            135deg,
-            rgba(255,255,255,.62),
-            rgba(255,255,255,.34)
-        );
+        rgba(255,255,255,.48);
 
     border:
         1px solid
-        rgba(255,255,255,.72);
+        rgba(255,255,255,.7);
 
     box-shadow:
         inset 0 0 20px
         rgba(255,255,255,.4),
 
-        0 8px 25px
+        0 8px 20px
         rgba(100,60,140,.07);
 
     animation:
-        boxReveal .9s ease;
+        boxReveal .8s ease;
 }
 
 .art-box::before {
-
     content: "";
 
     position: absolute;
@@ -703,8 +563,8 @@ button:active {
 
     background:
         radial-gradient(
-            circle at 50% 50%,
-            rgba(199,125,255,.11),
+            circle,
+            rgba(199,125,255,.13),
             transparent 65%
         );
 
@@ -713,40 +573,28 @@ button:active {
 }
 
 .art-box::after {
-
     content: "";
 
     position: absolute;
 
     width: 35%;
-
     height: 150%;
 
     top: -25%;
+    left: -70%;
 
-    left: -80%;
+    background:
+        rgba(255,255,255,.45);
 
     transform: rotate(25deg);
 
-    background:
-        linear-gradient(
-            90deg,
-            transparent,
-            rgba(255,255,255,.5),
-            transparent
-        );
+    filter: blur(5px);
 
     animation:
-        artShine 5s ease-in-out infinite;
+        artShine 4.5s ease-in-out infinite;
 }
 
-
-/* =========================================
-   ASCII
-========================================= */
-
 .ascii {
-
     position: relative;
 
     z-index: 2;
@@ -756,7 +604,6 @@ button:active {
     width: 100%;
 
     margin: 0;
-
     padding: 0;
 
     font-family:
@@ -771,7 +618,8 @@ button:active {
 
     letter-spacing: 0;
 
-    color: #9b4dca;
+    color:
+        #9b4dca;
 
     text-align: center;
 
@@ -783,9 +631,8 @@ button:active {
 
     unicode-bidi: isolate;
 
-    -webkit-font-smoothing: none;
-
-    text-rendering: geometricPrecision;
+    text-rendering:
+        geometricPrecision;
 
     text-shadow:
         0 0 4px
@@ -801,19 +648,20 @@ button:active {
 ========================================= */
 
 .message {
+    margin-top: 9px;
 
-    margin-top: 10px;
-
-    padding: 0 5px;
+    padding:
+        0 5px;
 
     font-size: 17px;
 
     line-height: 1.7;
 
-    color: #5e4d67;
+    color:
+        #5e4d67;
 
     animation:
-        messageAppear .9s .25s both;
+        messageAppear .8s .15s both;
 }
 
 
@@ -822,12 +670,12 @@ button:active {
 ========================================= */
 
 .tiny-heart {
+    margin-top: 9px;
 
-    margin-top: 10px;
+    font-size: 24px;
 
-    font-size: 25px;
-
-    color: #ff579b;
+    color:
+        #ff579b;
 
     text-shadow:
         0 0 8px
@@ -843,50 +691,50 @@ button:active {
 ========================================= */
 
 .creator {
-
     position: relative;
 
-    margin-top: 25px;
+    margin-top: 22px;
 
-    padding-top: 15px;
+    padding-top: 13px;
 
     border-top:
         1px solid
-        rgba(120,80,150,.13);
+        rgba(120,80,150,.12);
 
     display: flex;
 
     flex-direction: column;
 
-    gap: 4px;
+    gap: 3px;
 
-    color: #80698b;
+    color:
+        #80698b;
 
     font-size: 12px;
 
     opacity: .9;
 
     animation:
-        creatorAppear 1s .6s both;
+        creatorAppear .9s .4s both;
 }
 
 .creator strong {
-
     font-size: 14px;
 
-    color: #a35bc4;
+    color:
+        #a35bc4;
 
     font-weight: 800;
 }
 
 .creator small {
-
-    color: #ff6fa3;
+    color:
+        #ff6fa3;
 
     font-size: 13px;
 
     animation:
-        heartBeat 1.6s infinite;
+        heartBeat 1.7s infinite;
 }
 
 
@@ -895,7 +743,6 @@ button:active {
 ========================================= */
 
 .celebration {
-
     position: fixed;
 
     z-index: 999;
@@ -905,17 +752,15 @@ button:active {
     font-size:
         clamp(16px, 5vw, 26px);
 
-    color: #ff6fa3;
+    color:
+        #ff6fa3;
 
     text-shadow:
-        0 0 8px
-        rgba(255,255,255,.8),
-
-        0 0 15px
-        rgba(255,100,180,.4);
+        0 0 10px white,
+        0 0 18px rgba(255,100,180,.4);
 
     animation:
-        explode 1.6s
+        explode 1.4s
         cubic-bezier(.15,.8,.3,1)
         forwards;
 
@@ -930,7 +775,6 @@ button:active {
 ========================================= */
 
 .shake {
-
     animation:
         shake .4s ease;
 }
@@ -940,173 +784,84 @@ button:active {
    🎬 Animations
 ========================================= */
 
-@keyframes backgroundMove {
-
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-
-@keyframes auroraRotate {
-
+@keyframes aurora {
     from {
         transform:
-            rotate(0deg)
+            translate3d(-3%, -2%, 0)
             scale(1);
     }
 
     to {
         transform:
-            rotate(360deg)
+            translate3d(3%, 2%, 0)
             scale(1.08);
     }
 }
 
 
 @keyframes cardAppear {
-
-    0% {
-
+    from {
         opacity: 0;
 
         transform:
-            translateY(50px)
-            scale(.84)
-            rotateX(8deg);
+            translateY(45px)
+            scale(.88);
     }
 
-    100% {
-
+    to {
         opacity: 1;
 
         transform:
             translateY(0)
-            scale(1)
-            rotateX(0);
-    }
-}
-
-
-@keyframes borderFlow {
-
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
+            scale(1);
     }
 }
 
 
 @keyframes cardShine {
-
     0%,
-    65% {
-        left: -220px;
+    60% {
+        left: -180px;
     }
 
     100% {
-        left: 600px;
+        left: 550px;
     }
 }
 
 
 @keyframes giftFloat {
-
     0%,
     100% {
-
         transform:
             translateY(0)
-            rotate(-3deg)
-            scale(1);
+            rotate(-2deg);
     }
 
     50% {
-
         transform:
-            translateY(-10px)
-            rotate(3deg)
-            scale(1.05);
-    }
-}
-
-
-@keyframes giftGlow {
-
-    0%,
-    100% {
-
-        opacity: .3;
-
-        transform:
-            translateX(-50%)
-            scale(.85);
-    }
-
-    50% {
-
-        opacity: .65;
-
-        transform:
-            translateX(-50%)
-            scale(1.15);
+            translateY(-9px)
+            rotate(2deg);
     }
 }
 
 
 @keyframes titleAppear {
-
     from {
-
         opacity: 0;
-
         transform:
-            translateY(12px);
+            translateY(10px);
     }
 
     to {
-
         opacity: 1;
-
         transform:
             translateY(0);
     }
 }
 
 
-@keyframes buttonGradient {
-
-    0% {
-        background-position: 0% 50%;
-    }
-
-    50% {
-        background-position: 100% 50%;
-    }
-
-    100% {
-        background-position: 0% 50%;
-    }
-}
-
-
 @keyframes buttonShine {
-
     0% {
         left: -100px;
     }
@@ -1119,106 +874,87 @@ button:active {
 
 
 @keyframes starFloat {
-
     0% {
-
         opacity: 0;
 
         transform:
             translateY(20px)
-            scale(.5)
-            rotate(0deg);
+            scale(.5);
     }
 
     30% {
-        opacity: .75;
+        opacity: .8;
     }
 
-    65% {
+    70% {
         opacity: 1;
     }
 
     100% {
-
         opacity: 0;
 
         transform:
             translateY(-90px)
-            scale(1.3)
-            rotate(120deg);
+            scale(1.3);
     }
 }
 
 
 @keyframes magicPulse {
-
     0%,
     100% {
-
-        opacity: .55;
-
-        transform:
-            scale(1);
+        opacity: .6;
+        transform: scale(1);
     }
 
     50% {
-
         opacity: 1;
-
-        transform:
-            scale(1.08);
+        transform: scale(1.08);
     }
 }
 
 
 @keyframes nameReveal {
-
-    0% {
-
+    from {
         opacity: 0;
 
         transform:
-            translateY(25px)
-            scale(.55)
-            rotate(-3deg);
+            translateY(22px)
+            scale(.65);
 
-        filter: blur(8px);
+        filter:
+            blur(8px);
     }
 
-    60% {
-
+    65% {
         transform:
             translateY(-4px)
-            scale(1.05);
+            scale(1.04);
     }
 
-    100% {
-
+    to {
         opacity: 1;
 
         transform:
             translateY(0)
-            scale(1)
-            rotate(0);
+            scale(1);
 
-        filter: blur(0);
+        filter:
+            blur(0);
     }
 }
 
 
 @keyframes boxReveal {
-
     from {
-
         opacity: 0;
 
         transform:
             translateY(15px)
-            scale(.85);
+            scale(.9);
     }
 
     to {
-
         opacity: 1;
 
         transform:
@@ -1229,48 +965,45 @@ button:active {
 
 
 @keyframes artAura {
-
     0%,
     100% {
-        opacity: .45;
+        opacity: .5;
         transform: scale(.95);
     }
 
     50% {
-        opacity: .85;
+        opacity: 1;
         transform: scale(1.08);
     }
 }
 
 
 @keyframes asciiAppear {
-
-    0% {
-
+    from {
         opacity: 0;
 
         transform:
-            scale(.7);
+            scale(.75);
 
-        filter: blur(5px);
+        filter:
+            blur(5px);
     }
 
-    100% {
-
+    to {
         opacity: 1;
 
         transform:
             scale(1);
 
-        filter: blur(0);
+        filter:
+            blur(0);
     }
 }
 
 
 @keyframes artShine {
-
     0% {
-        left: -80%;
+        left: -70%;
     }
 
     45%,
@@ -1281,17 +1014,14 @@ button:active {
 
 
 @keyframes messageAppear {
-
     from {
-
         opacity: 0;
 
         transform:
-            translateY(15px);
+            translateY(12px);
     }
 
     to {
-
         opacity: 1;
 
         transform:
@@ -1301,22 +1031,19 @@ button:active {
 
 
 @keyframes heartBeat {
-
     0%,
     100% {
         transform: scale(1);
     }
 
     50% {
-        transform: scale(1.2);
+        transform: scale(1.18);
     }
 }
 
 
 @keyframes creatorAppear {
-
     from {
-
         opacity: 0;
 
         transform:
@@ -1324,7 +1051,6 @@ button:active {
     }
 
     to {
-
         opacity: .9;
 
         transform:
@@ -1334,29 +1060,23 @@ button:active {
 
 
 @keyframes explode {
-
     0% {
-
         opacity: 1;
 
         transform:
-            translate(0,0)
+            translate3d(0,0,0)
             scale(.3)
             rotate(0);
     }
 
-    60% {
-        opacity: 1;
-    }
-
     100% {
-
         opacity: 0;
 
         transform:
-            translate(
+            translate3d(
                 var(--x),
-                var(--y)
+                var(--y),
+                0
             )
             scale(1.35)
             rotate(360deg);
@@ -1365,26 +1085,21 @@ button:active {
 
 
 @keyframes shake {
-
     0%,
     100% {
         transform: translateX(0);
     }
 
-    20% {
-        transform: translateX(-8px);
+    25% {
+        transform: translateX(-7px);
     }
 
-    40% {
-        transform: translateX(8px);
+    50% {
+        transform: translateX(7px);
     }
 
-    60% {
-        transform: translateX(-6px);
-    }
-
-    80% {
-        transform: translateX(6px);
+    75% {
+        transform: translateX(-5px);
     }
 }
 
@@ -1396,63 +1111,23 @@ button:active {
 @media (max-width: 520px) {
 
     body {
-
-        padding: 12px;
-
-        /*
-           إلغاء حركة الخلفية على الموبايل
-           يوفر طاقة و FPS.
-        */
-
-        animation: none;
-
-        background-size: 140% 140%;
-    }
-
-    body::before {
-
-        animation: none;
-
-        opacity: .65;
-
-        filter: blur(20px);
+        padding: 10px;
     }
 
     .card {
-
         width: 96vw;
 
         max-height:
-            calc(100vh - 24px);
+            calc(100vh - 20px);
 
         padding:
-            27px 17px 18px;
+            25px 16px 17px;
 
-        border-radius: 29px;
-
-        /*
-           Blur أخف على الهاتف
-        */
-
-        backdrop-filter: blur(8px);
-
-        -webkit-backdrop-filter: blur(8px);
-
-        box-shadow:
-            0 20px 45px
-            rgba(70,40,110,.2);
-    }
-
-    /*
-       لا نحتاج حركة حدود قوية على الهاتف
-    */
-
-    .card::before {
-        animation-duration: 12s;
+        border-radius: 27px;
     }
 
     .gift {
-        font-size: 55px;
+        font-size: 53px;
     }
 
     h1 {
@@ -1464,31 +1139,22 @@ button:active {
     }
 
     input {
-
         font-size: 17px;
-
-        padding: 15px;
+        padding: 14px;
     }
 
     button {
-
         font-size: 17px;
-
-        padding: 15px;
+        padding: 14px;
     }
 
     .art-box {
-
-        min-height: 95px;
-
-        padding:
-            8px 2px;
+        min-height: 92px;
+        padding: 7px 2px;
     }
 
     .ascii {
-
         font-size: 5.5px;
-
         line-height: .95;
     }
 
@@ -1497,37 +1163,37 @@ button:active {
     }
 
     .name-glow {
-        font-size: 34px;
+        font-size: 33px;
     }
 }
 
 
 /* =========================================
-   📱 أجهزة صغيرة جدًا
+   📱 شاشات قصيرة
 ========================================= */
 
 @media (max-height: 700px) {
 
     .card {
-        padding-top: 20px;
+        padding-top: 18px;
     }
 
     .gift {
-        font-size: 45px;
+        font-size: 44px;
     }
 
     h1 {
-        margin-top: 5px;
+        margin-top: 4px;
     }
 
     .creator {
-        margin-top: 15px;
+        margin-top: 13px;
     }
 }
 
 
 /* =========================================
-   ⚡ أجهزة ضعيفة / تقليل الحركة
+   ♿ Reduced Motion
 ========================================= */
 
 @media (prefers-reduced-motion: reduce) {
@@ -1535,47 +1201,29 @@ button:active {
     *,
     *::before,
     *::after {
-
-        animation-duration:
-            .01ms !important;
-
-        animation-iteration-count:
-            1 !important;
-
-        transition-duration:
-            .01ms !important;
+        animation: none !important;
+        transition: none !important;
     }
 }
 
 
 /* =========================================
-   🚀 تحسين اللمس
+   📱 أجهزة ضعيفة / توفير الحركة
 ========================================= */
 
-button,
-input {
+@media (max-width: 600px) {
 
-    -webkit-tap-highlight-color:
-        transparent;
-}
+    body::before {
+        display: none;
+    }
 
+    .card {
+        box-shadow:
+            0 18px 40px
+            rgba(70,40,110,.18);
+    }
 
-/* =========================================
-   📜 Scrollbar
-========================================= */
-
-.card::-webkit-scrollbar {
-    width: 5px;
-}
-
-.card::-webkit-scrollbar-track {
-    background: transparent;
-}
-
-.card::-webkit-scrollbar-thumb {
-
-    background:
-        rgba(160,100,190,.22);
-
-    border-radius: 10px;
+    .card::after {
+        display: none;
+    }
 }
